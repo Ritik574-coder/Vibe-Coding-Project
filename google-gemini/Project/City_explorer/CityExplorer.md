@@ -28,19 +28,19 @@ The app features a clean, responsive three-panel layout: **Location Info**, **In
 
 *(Click any image to view full size)*
 
-![City Explorer Desktop View](https://i.imgur.com/0kE8z7P.png)  
+![City Explorer Desktop View](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/City_explorer/image/Overview.png)  
 *Three-panel layout: Info | Map | Chat*
 
-![Interactive Map with Marker](https://i.imgur.com/5zL3vXr.png)  
+![Interactive Map with Marker](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/City_explorer/image/Section.png)  
 *Leaflet map with smooth fly-to and popup*
 
-![Location Details Panel](https://i.imgur.com/9pQjF8k.png)  
+![Location Details Panel](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/City_explorer/image/map%20view.png)  
 *Rich location information display*
 
-![Chat Interface](https://i.imgur.com/X7mN2vL.png)  
+![Chat Interface](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/City_explorer/image/Chat%20section.png)  
 *Conversational search experience*
 
-![Mobile View](https://i.imgur.com/8rTqW9m.png)  
+![Mobile View](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/City_explorer/image/Location%20info.png)  
 *Stacked responsive layout on mobile*
 
 *Replace these placeholders with your own screenshots for the most accurate showcase!*
