@@ -24,6 +24,10 @@ The app features a clean, responsive three-panel layout: **Location Info**, **In
 - **No API Key Required**  
   Uses public Nominatim (OpenStreetMap) geocoding — works out of the box.
 
+  ## Inspired By
+This chatbot is inspired by City Exolprer.  
+View the original Gemini share: [https://gemini.google.com/share/7fe1dd4116e9](https://gemini.google.com/share/8947ad80739f)
+
 ## Screenshots
 
 *(Click any image to view full size)*
