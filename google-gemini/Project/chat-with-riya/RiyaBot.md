@@ -14,7 +14,7 @@ The interface is inspired by modern messaging apps (e.g., WhatsApp) and includes
 
 - **Multimedia Support**  
   - Send and receive text messages  
-  - Image uploads with AI vision-based reactions  
+  - Image uploads (now clickable to view full-size in new tab) with AI vision-based reactions  
   - Voice message recording and playback  
   - Text-to-speech for bot responses (with voice selection)
 
@@ -32,19 +32,22 @@ The interface is inspired by modern messaging apps (e.g., WhatsApp) and includes
   - Emoji picker  
   - Custom chat background and bubble styling
 
+## Inspired By
+This chatbot is inspired by a Gemini shared conversation/prompt.  
+View the original Gemini share: [https://gemini.google.com/share/7fe1dd4116e9](https://gemini.google.com/share/7fe1dd4116e9)
+
 ## Screenshots
+*(Click on any image to view larger / full version)*
 
-![Main Chat Interface (WhatsApp-inspired)](https://www.androidauthority.com/wp-content/uploads/2024/05/English-WhatsApp-UI-Refresh-Summary.jpg)
+![Chat Interface](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/chat-with-riya/Pics/ChatSection.png)
 
-![Chat Conversation View](https://miro.medium.com/max/3904/1*uzNyRenza_4A-dqv2XrTiw.jpeg)
+![Voice Interface](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/chat-with-riya/Pics/Voice%20Section.png)
 
-![Chatbot UI Example](https://codesandbox.io/api/v1/sandboxes/m2ui4/screenshot.png)
+![Call Interface](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/chat-with-riya/Pics/CallSection.png)
 
-![AI Companion Chat Example](https://assets.mofoprod.net/network/images/Screenshots_from_EVA_AI_Chat_Bot__Soulmate.original_61P1WxT.png)
+![Manue Interface](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/chat-with-riya/Pics/ManueSection.png)
 
-![Voice Call Interface Example](https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23603663/676eeda0_4ebe_4742_857e_9934a172200d.png?quality=90&strip=all&crop=7.8125,0,84.375,100)
-
-*Replace the above placeholders with your own screenshots for accuracy.*
+*Replace these with your own actual app screenshots for the best result!*
 
 ## Tech Stack
 
@@ -61,4 +64,4 @@ The interface is inspired by modern messaging apps (e.g., WhatsApp) and includes
 
 ## Installation
 
-. Clone the repository
+1. Clone the repository
