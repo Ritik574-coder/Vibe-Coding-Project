@@ -125,28 +125,48 @@ A conversational mentor with selectable personas:
 ---
 
 ## Screenshots
-
+---
 *(Dashboard)*
 ![Dashboard](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/TheNexus1.png)
+---
 *(Problem Solver)*
+---
 ![Problem Solver](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/TheNexus2.png)
+---
 *(Decision Wargame)*
+---
 ![Decision Wargame](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/Decision%20Wargaming.png)
+---
 *(Devils Advocate)*
+---
 ![Devils Advocate](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/Intellectual%20Sparring.png)
+---
 *(Skill Tree)*
+---
 ![Skill Tree](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/Skill%20Tree%20Architect.png)
+---
 *(The Socratic Journal)*
+---
 ![The Socratic Journal](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/The%20Socratic%20Journal.png)
+---
 *(History's Mirror)*
+---
 ![History's Mirror](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/History's%20Mirror.png)
+---
 *(Communication Alchemist)*
+---
 ![Communication Alchemist](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/Communication%20Alchemist.png)
+---
 *(The Mentor)*
+---
 ![The Mentor](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/Ai%20Mentor.png)
+---
 *(The Archive)*
+---
 ![The Archive](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/TheArchive.png)
+---
 *(Wisdom Database)*
+---
 ![Wisdom Database](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TheNexus/TheNexusImage/Wisdom%20DB.png)
 
 
