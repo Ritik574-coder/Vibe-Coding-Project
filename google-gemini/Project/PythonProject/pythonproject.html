@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Mastery: From Zero to Architect</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Markdown-it for AI responses -->
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Warm Professional Tech -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 600px; 
+            margin: 0 auto; 
+            height: 300px; 
+            max-height: 400px; 
+        }
+        @media (min-width: 768px) { 
+            .chart-container { height: 350px; } 
+        }
+        /* Custom Scrollbar for code blocks */
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        /* AI Loading Animation */
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        .prose p { margin-bottom: 0.5em; }
+        .prose code { background: #f1f5f9; padding: 2px 4px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.9em; color: #db2777; }
+        .prose strong { color: #4f46e5; }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl mr-2">🐍</span>
+                    <h1 class="font-bold text-xl tracking-tight text-slate-900 hidden sm:block">Python Architect Path</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="switchView('dashboard')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-stone-100 transition-colors text-indigo-600" id="nav-dashboard">Dashboard</button>
+                    <button onclick="switchView('learning')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-stone-100 transition-colors text-slate-600" id="nav-learning">Curriculum</button>
+                    <button onclick="switchView('tracker')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:bg-stone-100 transition-colors text-slate-600" id="nav-tracker">My Tracker</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app-container" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+        <!-- View: Dashboard -->
+        <section id="view-dashboard" class="space-y-8 animate-fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 sm:p-8">
+                <div class="max-w-3xl">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Welcome, Future Architect.</h2>
+                    <p class="text-lg text-slate-600 mb-6">
+                        This is your command center for mastering Python. From absolute zero to professional engineering. 
+                        Use this interactive system to track your progress through the 5 phases of the curriculum.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="switchView('learning')" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition shadow-sm">Start Learning</button>
+                        <button onclick="switchView('tracker')" class="bg-white text-indigo-600 border border-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition">Update Tracker</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart Section -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                    <h3 class="text-lg font-semibold mb-2">Mastery Progress</h3>
+                    <p class="text-sm text-slate-500 mb-6">Real-time status based on your tracker updates.</p>
+                    <div class="chart-container">
+                        <canvas id="masteryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Phase Overview -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 flex flex-col">
+                    <h3 class="text-lg font-semibold mb-4">The 5 Phases of Mastery</h3>
+                    <div class="flex-grow space-y-4 overflow-y-auto custom-scroll max-h-[400px] pr-2">
+                        <!-- Phase 1 -->
+                        <div class="p-4 rounded-lg bg-indigo-50 border border-indigo-100">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-indigo-800">Phase 1: The Bedrock</span>
+                                <span class="text-xs bg-indigo-200 text-indigo-800 px-2 py-1 rounded-full">Current Focus</span>
+                            </div>
+                            <p class="text-sm text-indigo-700">Variables, Logic, Flow. Writing scripts that "think".</p>
+                        </div>
+                        <!-- Phase 2 -->
+                        <div class="p-4 rounded-lg bg-stone-50 border border-stone-200 opacity-75">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-slate-700">Phase 2: Core Structures</span>
+                                <span class="text-xs bg-stone-200 text-slate-600 px-2 py-1 rounded-full">Next Up</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Lists, Dicts, Loops, Functions. Organizing logic.</p>
+                        </div>
+                        <!-- Phase 3 -->
+                        <div class="p-4 rounded-lg bg-stone-50 border border-stone-200 opacity-50">
+                            <h4 class="font-bold text-slate-700">Phase 3: Object-Oriented</h4>
+                            <p class="text-sm text-slate-600">Classes, Inheritance, Modeling real-world objects.</p>
+                        </div>
+                        <!-- Phase 4 -->
+                        <div class="p-4 rounded-lg bg-stone-50 border border-stone-200 opacity-50">
+                            <h4 class="font-bold text-slate-700">Phase 4: Advanced Tools</h4>
+                            <p class="text-sm text-slate-600">Decorators, Generators, efficient "Pythonic" code.</p>
+                        </div>
+                        <!-- Phase 5 -->
+                        <div class="p-4 rounded-lg bg-stone-50 border border-stone-200 opacity-50">
+                            <h4 class="font-bold text-slate-700">Phase 5: Extreme / Arch.</h4>
+                            <p class="text-sm text-slate-600">Internals, Concurrency, Production Systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View: Learning Hub -->
+        <section id="view-learning" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Curriculum Explorer</h2>
+                    <p class="text-slate-500">Select a chapter to dive deep into the concepts.</p>
+                </div>
+                <div class="w-full md:w-64">
+                    <label for="chapterSelect" class="sr-only">Select Chapter</label>
+                    <select id="chapterSelect" class="block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 bg-white border px-4 py-2">
+                        <option value="ch1">Ch 1: Environment & Why</option>
+                        <option value="ch2">Ch 2: Data Types</option>
+                        <option value="ch3">Ch 3: Control Flow</option>
+                        <option value="ch4">Ch 4: Data Structures</option>
+                        <option value="ch5">Ch 5: Loops</option>
+                        <option value="ch6">Ch 6: Functions</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dynamic Chapter Content Container -->
+            <div id="chapterContent" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Content will be injected here via JS -->
+            </div>
+        </section>
+
+        <!-- View: Tracker -->
+        <section id="view-tracker" class="hidden space-y-8">
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">The Universal Tracker System</h2>
+                <p class="text-slate-600 mb-6">
+                    <strong>The "Confidence" Rule:</strong> You cannot move to the next chapter until Confidence is at least <strong>4/5</strong>.
+                    <br>Click the Status dot to cycle: <span class="text-rose-500">● Not Started</span> → <span class="text-amber-400">● Learning</span> → <span class="text-sky-500">● Practicing</span> → <span class="text-emerald-500">● Mastered</span>.
+                </p>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Chapter</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Topic</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Confidence (1-5)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Practice Done</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trackerTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- Rows injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tracker Analytics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                    <h3 class="text-lg font-semibold mb-4">Confidence Heatmap</h3>
+                    <div class="chart-container">
+                        <canvas id="confidenceChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                    <h3 class="text-lg font-semibold mb-4">Readiness Checklist</h3>
+                    <ul class="space-y-3" id="checklistContainer">
+                        <!-- Checklist items -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global AI Modal -->
+    <div id="aiModal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col max-h-[80vh]">
+            <div class="p-4 border-b border-stone-100 flex justify-between items-center bg-indigo-50 rounded-t-2xl">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">✨</span>
+                    <h3 class="font-bold text-indigo-900" id="aiModalTitle">AI Architect</h3>
+                </div>
+                <button onclick="closeAiModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto flex-grow custom-scroll bg-white" id="aiModalContent">
+                <!-- Content injected here -->
+            </div>
+            <div class="p-4 border-t border-stone-100 bg-stone-50 rounded-b-2xl text-right">
+                <button onclick="closeAiModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 mt-auto">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <p class="text-stone-500 text-sm">Based on the "From Zero to Architect" Curriculum.</p>
+            <p class="text-stone-400 text-xs flex items-center gap-1">
+                Powered by <span class="text-indigo-400">Gemini</span> ✨
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Gemini Integration ---
+        const apiKey = ""; // Set by environment
+        const md = window.markdownit();
+
+        // Safe Call Wrapper
+        async function callGemini(prompt, modalTitle = "AI Architect") {
+            const resultDiv = document.getElementById('aiModalContent');
+            const titleDiv = document.getElementById('aiModalTitle');
+            const modal = document.getElementById('aiModal');
+
+            // Open Modal with Loading State
+            titleDiv.textContent = modalTitle;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            resultDiv.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-40 space-y-4">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 bg-indigo-600 rounded-full typing-dot"></div>
+                        <div class="w-3 h-3 bg-indigo-600 rounded-full typing-dot"></div>
+                        <div class="w-3 h-3 bg-indigo-600 rounded-full typing-dot"></div>
+                    </div>
+                    <p class="text-indigo-600 font-medium animate-pulse">Consulting the Architect...</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+
+                if (!response.ok) throw new Error('API Error');
+
+                const data = await response.json();
+                const rawText = data.candidates[0].content.parts[0].text;
+                
+                // Render Markdown
+                resultDiv.innerHTML = `<div class="prose prose-sm prose-indigo max-w-none">${md.render(rawText)}</div>`;
+
+            } catch (error) {
+                console.error(error);
+                resultDiv.innerHTML = `
+                    <div class="text-center p-6 text-rose-600 bg-rose-50 rounded-lg">
+                        <p class="font-bold">Connection Error</p>
+                        <p class="text-sm">The Architect is currently unavailable. Please check your API configuration or try again.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function closeAiModal() {
+            document.getElementById('aiModal').classList.add('hidden');
+            document.getElementById('aiModal').classList.remove('flex');
+        }
+
+        // --- AI Features ---
+
+        function explainTopic(topicTitle, topicDesc) {
+            const prompt = `
+                Act as a senior Python Instructor.
+                The student is a complete beginner asking about: "${topicTitle}".
+                Context from curriculum: "${topicDesc}".
+                
+                1. Explain this concept simply in under 3 sentences.
+                2. Provide a unique real-world analogy (different from standard ones if possible).
+                3. Show a very simple 2-line code example.
+                Use friendly, encouraging language.
+            `;
+            callGemini(prompt, `Explaining: ${topicTitle}`);
+        }
+
+        function analyzeCurrentCode(chapterKey) {
+            const code = curriculumData.chapters[chapterKey].codeSim.code;
+            const prompt = `
+                Act as a Python Code Doctor.
+                Analyze the following code snippet intended for a beginner:
+                
+                \`\`\`python
+                ${code}
+                \`\`\`
+
+                1. Explain what this code does step-by-step.
+                2. Point out any syntax details a beginner should notice (like indentation or quotes).
+                3. Suggest one small fun modification the student could try.
+            `;
+            callGemini(prompt, "Code Doctor Diagnosis");
+        }
+
+        function generateQuiz(chapterKey) {
+            const chapterTitle = curriculumData.chapters[chapterKey].title;
+            const prompt = `
+                Create a single multiple-choice question to test a beginner on "${chapterTitle}".
+                
+                Format the output exactly like this:
+                **Question:** [The Question]
+                
+                A) [Option A]
+                B) [Option B]
+                C) [Option C]
+                
+                **Correct Answer:** [Letter] - [Brief Explanation]
+            `;
+            callGemini(prompt, "Pop Quiz Generator");
+        }
+
+        // --- Data Layer ---
+        const curriculumData = {
+            chapters: {
+                ch1: {
+                    title: "1. The Environment & The 'Why'",
+                    overview: "Setting up the workshop. Python is the engine; VS Code is the dashboard.",
+                    realLife: "Every data engineer spends the first day setting up their local environment.",
+                    topics: [
+                        {
+                            title: "Interpreter vs Editor",
+                            desc: "Python executes. VS Code is where you write.",
+                            analogy: "Python = Engine. VS Code = Dashboard. Code = Fuel.",
+                            mistake: "Confusing terminal (command line) with Python shell."
+                        },
+                        {
+                            title: "Variables (Memory Labels)",
+                            desc: "Named pointer to a specific place in memory.",
+                            why: "We need to save results to use them later.",
+                            visualPrompt: "Imagine variables as sticky labels on boxes, not the boxes themselves."
+                        }
+                    ],
+                    codeSim: {
+                        title: "Variables in Action",
+                        code: `# Creating variables\nplayer_name = "Alice"\nplayer_score = 100\n\n# Using them\nprint(player_name)\nprint(type(player_score))`,
+                        output: "Alice\n<class 'int'>"
+                    },
+                    practice: [
+                        "Print your name and goal.",
+                        "Swap variable values (a=5, b=10).",
+                        "Thinking: Why can't we add text + numbers?"
+                    ]
+                },
+                ch2: {
+                    title: "2. Data Types (The Ingredients)",
+                    overview: "Understanding materials: Text, Numbers, Logic.",
+                    realLife: "Cleaning data (e.g., turning '$50.00' text into number 50.00).",
+                    topics: [
+                        {
+                            title: "Strings (str)",
+                            desc: "Sequence of characters in quotes.",
+                            mistake: "Forgetting quotes (name = Bob is wrong)."
+                        },
+                        {
+                            title: "Ints & Floats",
+                            desc: "Whole numbers vs Decimals.",
+                            technical: "Floats have binary precision quirks."
+                        },
+                        {
+                            title: "Booleans",
+                            desc: "True or False. The basis of logic.",
+                            analogy: "A light switch. ON or OFF."
+                        }
+                    ],
+                    codeSim: {
+                        title: "The Bill Calculator",
+                        code: `# Mock input interaction\ncost_text = "50" # Simulate input("Enter cost")\ncost = float(cost_text)\ntip = cost * 0.20\nprint(f"Tip amount: \${tip}")`,
+                        output: "Tip amount: $10.0"
+                    },
+                    practice: [
+                        "Age Calc: Birth year subtraction.",
+                        "Type Fixer: Convert string price to float.",
+                        "Thinking: Float precision errors (0.1 + 0.2)."
+                    ]
+                },
+                ch3: {
+                    title: "3. Control Flow (The Logic)",
+                    overview: "Making decisions. If X, do Y.",
+                    realLife: "Login systems: IF password match, enter.",
+                    topics: [
+                        {
+                            title: "Comparison Operators",
+                            desc: "==, !=, >, <. Asking questions.",
+                            mistake: "Confusing = (assign) with == (compare)."
+                        },
+                        {
+                            title: "Logical Operators",
+                            desc: "and, or, not.",
+                            analogy: "AND = Both keys for nuke. OR = Either key for door."
+                        }
+                    ],
+                    codeSim: {
+                        title: "Club Bouncer Logic",
+                        code: `age = 20\nhas_ticket = True\n\nif age >= 18 and has_ticket:\n    print("Enter the club.")\nelse:\n    print("Go home.")`,
+                        output: "Enter the club."
+                    },
+                    practice: [
+                        "Grade Calc (>90 is A).",
+                        "Odd/Even Checker (Modulo %).",
+                        "Thinking: if vs elif flow."
+                    ]
+                },
+                ch4: {
+                    title: "4. Data Structures (Containers)",
+                    overview: "Storing groups of data.",
+                    realLife: "Lists of emails, User profile dictionaries.",
+                    topics: [
+                        {
+                            title: "Lists []",
+                            desc: "Ordered, mutable collection.",
+                            analogy: "Shopping list or bookshelf."
+                        },
+                        {
+                            title: "Dictionaries {}",
+                            desc: "Key-Value pairs. Fast lookup.",
+                            analogy: "Phonebook (Name -> Number).",
+                            why: "Crucial for JSON/API data."
+                        },
+                        {
+                            title: "Tuples ()",
+                            desc: "Immutable lists.",
+                            analogy: "Carved stone tablet."
+                        }
+                    ],
+                    codeSim: {
+                        title: "Dict Access",
+                        code: `user = {"id": 101, "name": "Coder_X"}\nprint(user["name"])\n\nfruits = ["apple", "banana"]\nfruits.append("cherry")\nprint(fruits)`,
+                        output: "Coder_X\n['apple', 'banana', 'cherry']"
+                    },
+                    practice: [
+                        "Shopping List: Add/Remove items.",
+                        "Phonebook: Create and access dict.",
+                        "Thinking: When to use Tuple?"
+                    ]
+                },
+                ch5: {
+                    title: "5. Loops (Repetition)",
+                    overview: "Doing the same thing automatically.",
+                    realLife: "Emailing every customer in a database.",
+                    topics: [
+                        {
+                            title: "For Loops",
+                            desc: "Run for specific times or items.",
+                            analogy: "Assembly line worker."
+                        },
+                        {
+                            title: "While Loops",
+                            desc: "Run while condition is true.",
+                            mistake: "Infinite loops (crashing)."
+                        }
+                    ],
+                    codeSim: {
+                        title: "Looping Range",
+                        code: `for i in range(1, 4):\n    print(f"Counting: {i}")\n\nbattery = 2\nwhile battery > 0:\n    print("Phone on...")\n    battery -= 1`,
+                        output: "Counting: 1\nCounting: 2\nCounting: 3\nPhone on...\nPhone on..."
+                    },
+                    practice: [
+                        "Summation: Add 1 to 100.",
+                        "List Cleaner: Filter positive numbers.",
+                        "Thinking: Break vs Continue."
+                    ]
+                },
+                ch6: {
+                    title: "6. Functions (Reusability)",
+                    overview: "Grouping code into named blocks.",
+                    realLife: "Don't build a toaster every time; just push the lever.",
+                    topics: [
+                        {
+                            title: "Def & Call",
+                            desc: "Creating vs Executing logic.",
+                            why: "DRY Principle (Don't Repeat Yourself)."
+                        },
+                        {
+                            title: "Params & Return",
+                            desc: "Input slots & Data output.",
+                            mistake: "Confusing print() with return."
+                        }
+                    ],
+                    codeSim: {
+                        title: "Area Calculator",
+                        code: `def calc_area(w, h):\n    return w * h\n\nroom = calc_area(5, 5)\nprint(f"Area: {room}")`,
+                        output: "Area: 25"
+                    },
+                    practice: [
+                        "Greeting Bot Function.",
+                        "Is_Even Helper Function.",
+                        "Thinking: Variable Scope."
+                    ]
+                }
+            },
+            tracker: [
+                { id: 't1', ch: 'Ch 1', topic: 'Install/Setup', status: 0, conf: 1, practice: false },
+                { id: 't2', ch: 'Ch 1', topic: 'Variables', status: 0, conf: 1, practice: false },
+                { id: 't3', ch: 'Ch 2', topic: 'Strings/Types', status: 0, conf: 1, practice: false },
+                { id: 't4', ch: 'Ch 2', topic: 'Math/Floats', status: 0, conf: 1, practice: false },
+                { id: 't5', ch: 'Ch 3', topic: 'Conditionals', status: 0, conf: 1, practice: false },
+                { id: 't6', ch: 'Ch 3', topic: 'Logic Ops', status: 0, conf: 1, practice: false },
+                { id: 't7', ch: 'Ch 4', topic: 'Lists', status: 0, conf: 1, practice: false },
+                { id: 't8', ch: 'Ch 4', topic: 'Dictionaries', status: 0, conf: 1, practice: false },
+                { id: 't9', ch: 'Ch 5', topic: 'For Loops', status: 0, conf: 1, practice: false },
+                { id: 't10', ch: 'Ch 5', topic: 'While Loops', status: 0, conf: 1, practice: false },
+                { id: 't11', ch: 'Ch 6', topic: 'Functions', status: 0, conf: 1, practice: false },
+                { id: 't12', ch: 'Ch 6', topic: 'Return vs Print', status: 0, conf: 1, practice: false },
+            ],
+            checklist: [
+                { text: "Can read CSV and process with Dict", done: false },
+                { text: "Understand if __name__ == '__main__'", done: false },
+                { text: "Debug traceback without panic", done: false },
+                { text: "Built 2 Projects (Scraper/Game)", done: false }
+            ]
+        };
+
+        // --- Status Logic ---
+        const statusMap = {
+            0: { label: 'Not Started', color: 'text-rose-500', bg: 'bg-rose-100' },
+            1: { label: 'Learning', color: 'text-amber-500', bg: 'bg-amber-100' },
+            2: { label: 'Practicing', color: 'text-sky-500', bg: 'bg-sky-100' },
+            3: { label: 'Mastered', color: 'text-emerald-500', bg: 'bg-emerald-100' }
+        };
+
+        // --- Core Functions ---
+
+        function switchView(viewId) {
+            // Hide all views
+            ['dashboard', 'learning', 'tracker'].forEach(v => {
+                document.getElementById(`view-${v}`).classList.add('hidden');
+                document.getElementById(`nav-${v}`).classList.remove('text-indigo-600', 'bg-stone-50');
+                document.getElementById(`nav-${v}`).classList.add('text-slate-600');
+            });
+            
+            // Show selected view
+            const selected = document.getElementById(`view-${viewId}`);
+            selected.classList.remove('hidden');
+            selected.classList.add('animate-fade-in'); // Add simple animation
+            
+            // Active Nav State
+            const navBtn = document.getElementById(`nav-${viewId}`);
+            navBtn.classList.remove('text-slate-600');
+            navBtn.classList.add('text-indigo-600', 'bg-stone-50');
+
+            // Refresh charts if dashboard or tracker
+            if(viewId === 'dashboard') updateMasteryChart();
+            if(viewId === 'tracker') updateConfidenceChart();
+        }
+
+        function renderLearningContent() {
+            const chapterKey = document.getElementById('chapterSelect').value;
+            const data = curriculumData.chapters[chapterKey];
+            const container = document.getElementById('chapterContent');
+
+            // 1. Context Column
+            let topicsHtml = data.topics.map(t => `
+                <div class="mb-4 p-4 bg-white rounded-lg border border-stone-200 hover:border-indigo-300 transition-colors shadow-sm group">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-bold text-indigo-700">${t.title}</h4>
+                        <button onclick="explainTopic('${t.title}', '${t.desc}')" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-2 py-1 rounded transition-colors border border-indigo-200 flex items-center gap-1">
+                            ✨ Explain
+                        </button>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-2">${t.desc}</p>
+                    ${t.analogy ? `<div class="text-xs bg-amber-50 text-amber-800 p-2 rounded">💡 <strong>Analogy:</strong> ${t.analogy}</div>` : ''}
+                    ${t.mistake ? `<div class="text-xs bg-rose-50 text-rose-800 p-2 rounded mt-2">⚠️ <strong>Mistake:</strong> ${t.mistake}</div>` : ''}
+                </div>
+            `).join('');
+
+            const contextCol = `
+                <div class="space-y-6">
+                    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+                        <h3 class="font-bold text-lg text-indigo-900">Overview</h3>
+                        <p class="text-slate-700 mt-1">${data.overview}</p>
+                        <p class="text-xs text-indigo-600 mt-2 font-medium uppercase tracking-wide">Real Life Application</p>
+                        <p class="text-sm text-slate-600 italic">"${data.realLife}"</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 mb-3 flex items-center">
+                            <span class="bg-indigo-100 text-indigo-600 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">1</span> 
+                            Key Topics
+                        </h3>
+                        ${topicsHtml}
+                    </div>
+                </div>
+            `;
+
+            // 2. Simulation Column
+            const simCol = `
+                <div class="space-y-6">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-600 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">2</span> 
+                        Code Simulator
+                    </h3>
+                    <div class="bg-slate-900 rounded-lg shadow-lg overflow-hidden flex flex-col h-full max-h-[500px]">
+                        <div class="bg-slate-800 px-4 py-2 flex justify-between items-center border-b border-slate-700">
+                            <span class="text-xs text-slate-300 font-mono">main.py</span>
+                            <div class="flex space-x-2">
+                                <button onclick="analyzeCurrentCode('${chapterKey}')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-1 rounded transition-colors flex items-center gap-1">
+                                    ✨ Analyze & Explain
+                                </button>
+                                <button onclick="runSimulation('${chapterKey}')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-3 py-1 rounded transition-colors flex items-center">
+                                    ▶ Run
+                                </button>
+                            </div>
+                        </div>
+                        <pre class="p-4 text-sm text-stone-100 font-mono overflow-auto flex-grow custom-scroll bg-slate-900 border-b border-slate-700 leading-relaxed">${data.codeSim.code}</pre>
+                        <div class="bg-black p-4 font-mono text-sm h-32 overflow-auto">
+                            <div class="text-slate-500 text-xs uppercase mb-1">Terminal Output:</div>
+                            <div id="simOutput" class="text-emerald-400 font-bold animate-pulse">Waiting for execution...</div>
+                        </div>
+                    </div>
+                    <div class="bg-sky-50 border border-sky-100 p-4 rounded-lg">
+                        <h4 class="text-sm font-bold text-sky-800 mb-1">🤖 AI Architect</h4>
+                        <p class="text-xs text-sky-700 mb-2">Click the ✨ buttons above to get personalized help from the AI Architect.</p>
+                    </div>
+                </div>
+            `;
+
+            // 3. Practice Column
+            const practiceList = data.practice.map((task, idx) => `
+                <li class="flex items-start">
+                    <input type="checkbox" id="task-${idx}" class="mt-1 mr-2 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                    <label for="task-${idx}" class="text-sm text-slate-700">${task}</label>
+                </li>
+            `).join('');
+
+            const practiceCol = `
+                <div class="space-y-6">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-600 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">3</span> 
+                        Mini Tasks
+                    </h3>
+                    <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-sm">
+                        <ul class="space-y-4 mb-6">
+                            ${practiceList}
+                        </ul>
+                        <button onclick="generateQuiz('${chapterKey}')" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md transition-all flex items-center justify-center gap-2">
+                            ✨ Challenge Me: Pop Quiz
+                        </button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-stone-200 shadow-sm">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sm">Chapter Confidence</h4>
+                        <p class="text-xs text-slate-500 mb-3">Rate your understanding before moving on.</p>
+                        <div class="flex items-center space-x-2">
+                             <input type="range" min="1" max="5" value="1" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                             <span class="text-sm font-bold text-indigo-600">1/5</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = contextCol + simCol + practiceCol;
+        }
+
+        function runSimulation(chapterKey) {
+            const outputEl = document.getElementById('simOutput');
+            outputEl.classList.remove('animate-pulse');
+            outputEl.innerHTML = '<span class="text-slate-500">Running...</span>';
+            
+            setTimeout(() => {
+                const result = curriculumData.chapters[chapterKey].codeSim.output;
+                // Replace newlines with <br> for HTML display
+                outputEl.innerHTML = result.replace(/\n/g, '<br>');
+            }, 600);
+        }
+
+        function renderTracker() {
+            const tbody = document.getElementById('trackerTableBody');
+            tbody.innerHTML = curriculumData.tracker.map((item, index) => {
+                const st = statusMap[item.status];
+                return `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">${item.ch}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">${item.topic}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <button onclick="toggleStatus(${index})" class="flex items-center space-x-2 focus:outline-none hover:opacity-80 transition">
+                            <span class="h-3 w-3 rounded-full ${st.bg.replace('bg-', 'bg-').replace('100', '500')}"></span>
+                            <span class="text-sm font-medium ${st.color}">${st.label}</span>
+                        </button>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                        <select onchange="updateConfidence(${index}, this.value)" class="text-xs border-none bg-stone-50 rounded p-1 focus:ring-0">
+                            ${[1,2,3,4,5].map(v => `<option value="${v}" ${item.conf == v ? 'selected' : ''}>${v}/5</option>`).join('')}
+                        </select>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                        <input type="checkbox" ${item.practice ? 'checked' : ''} onchange="togglePractice(${index})" class="h-4 w-4 text-indigo-600 rounded border-gray-300">
+                    </td>
+                </tr>
+                `;
+            }).join('');
+
+            const checklistContainer = document.getElementById('checklistContainer');
+            checklistContainer.innerHTML = curriculumData.checklist.map((item, i) => `
+                <li class="flex items-center">
+                    <input type="checkbox" ${item.done ? 'checked' : ''} onclick="toggleChecklist(${i})" class="h-5 w-5 text-indigo-600 rounded border-gray-300 mr-3">
+                    <span class="${item.done ? 'line-through text-slate-400' : 'text-slate-700'}">${item.text}</span>
+                </li>
+            `).join('');
+        }
+
+        // --- Interaction Handlers ---
+
+        function toggleStatus(index) {
+            let s = curriculumData.tracker[index].status;
+            s = (s + 1) % 4; // Cycle 0-3
+            curriculumData.tracker[index].status = s;
+            renderTracker();
+            updateMasteryChart(); // Live update dashboard
+        }
+
+        function updateConfidence(index, val) {
+            curriculumData.tracker[index].conf = parseInt(val);
+            updateConfidenceChart();
+        }
+
+        function togglePractice(index) {
+            curriculumData.tracker[index].practice = !curriculumData.tracker[index].practice;
+        }
+        
+        function toggleChecklist(index) {
+            curriculumData.checklist[index].done = !curriculumData.checklist[index].done;
+            renderTracker(); // re-render to strike through
+        }
+
+        // --- Charts ---
+        let masteryChartInstance = null;
+        let confidenceChartInstance = null;
+
+        function updateMasteryChart() {
+            const ctx = document.getElementById('masteryChart').getContext('2d');
+            const counts = [0, 0, 0, 0]; // Not Started, Learning, Practicing, Mastered
+            curriculumData.tracker.forEach(t => counts[t.status]++);
+
+            if (masteryChartInstance) masteryChartInstance.destroy();
+
+            masteryChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Not Started', 'Learning', 'Practicing', 'Mastered'],
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: ['#f43f5e', '#fbbf24', '#0ea5e9', '#10b981'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { usePointStyle: true, font: { family: 'Inter' } } }
+                    }
+                }
+            });
+        }
+
+        function updateConfidenceChart() {
+            const ctx = document.getElementById('confidenceChart').getContext('2d');
+            const confidences = curriculumData.tracker.map(t => t.conf);
+            const labels = curriculumData.tracker.map(t => t.topic.substring(0, 10) + '...');
+
+            if (confidenceChartInstance) confidenceChartInstance.destroy();
+
+            confidenceChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Confidence Level (1-5)',
+                        data: confidences,
+                        backgroundColor: '#6366f1',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 5, ticks: { stepSize: 1 } },
+                        x: { display: false } // Hide clutter
+                    }
+                }
+            });
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLearningContent(); // Init Chapter 1
+            renderTracker();
+            updateMasteryChart();
+            
+            // Listener for chapter select
+            document.getElementById('chapterSelect').addEventListener('change', renderLearningContent);
+        });
+
+    </script>
+</body>
+</html>
