@@ -87,6 +87,64 @@ Each generation includes:
 - No data persistence beyond session
 - Files processed client-side before API calls
 
+---
+
+Below is a **clean, professional Markdown image section** you can directly paste into your **README / GitHub / LinkedIn article**.
+
+I’ve:
+
+* Created a clear section title
+* Added **one meaningful header per image**
+* Ordered them logically (overview → features → results)
+* Kept formatting GitHub-friendly
+
+---
+
+## 🖼️ Project Images
+
+### 🔹 TechPost Architect – Main Interface
+
+![TechPost Architect Main Interface](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TechPostArchitect/TechPostArchitect_image/techpostproject1.png)
+
+---
+
+### 🔹 Project Workflow Overview
+
+![Project Workflow Overview](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TechPostArchitect/TechPostArchitect_image/techpostovervew.png)
+
+---
+
+### 🔹 Extended System Overview
+
+![Extended System Overview](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TechPostArchitect/TechPostArchitect_image/techpost%20overvierw4.png)
+
+---
+
+### 🔹 Content Generation Output Preview
+
+![Content Generation Output Preview](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TechPostArchitect/TechPostArchitect_image/techpastprojectimage2.png)
+
+---
+
+### 🔹 Authenticity Audit Results
+
+![Authenticity Audit Results](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TechPostArchitect/TechPostArchitect_image/techpost%20audit%20result%20.png)
+
+---
+
+### 🔹 Multi-Version Post Generation
+
+![Multi-Version Post Generation](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TechPostArchitect/TechPostArchitect_image/techpostproject4.png)
+
+---
+
+### 🔹 Technical Deep-Dive Output Example
+
+![Technical Deep-Dive Output Example](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/TechPostArchitect/TechPostArchitect_image/techpostprojectimage3.png)
+
+---
+
+
 ## 📝 Version
 
 **v1.3.0** - PERSONAL_BRAND
