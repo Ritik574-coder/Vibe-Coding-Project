@@ -76,7 +76,7 @@ Internals, Concurrency - Production Systems
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/python-mastery.git
+   git clone https://github.com/Ritik574-coder/Vibe-Coding-Project/tree/main/google-gemini/Project/PythonProject.git
    ```
 
 2. **Add your Gemini API Key**
