@@ -26,19 +26,19 @@
 ## 🎨 Screenshots
 
 ### Dashboard View
-![Dashboard](https://via.placeholder.com/800x450/6366f1/ffffff?text=Dashboard+View)
+![Dashboard](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/PythonProject/%20Python%20Architect%20Path%20Image/image.png)
 *Your command center featuring mastery progress visualization and phase overview*
 
 ### Curriculum Explorer
-![Curriculum](https://via.placeholder.com/800x450/10b981/ffffff?text=Curriculum+Explorer)
+![Curriculum](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/PythonProject/%20Python%20Architect%20Path%20Image/Image2.png)
 *Interactive chapter-by-chapter breakdown with AI-powered explanations*
 
 ### Code Simulator
-![Code Simulator](https://via.placeholder.com/800x450/f59e0b/ffffff?text=Code+Simulator)
+![Code Simulator](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/PythonProject/%20Python%20Architect%20Path%20Image/image4.png)
 *Run Python code directly in browser with real-time output*
 
 ### Progress Tracker
-![Progress Tracker](https://via.placeholder.com/800x450/8b5cf6/ffffff?text=Progress+Tracker)
+![Progress Tracker](https://github.com/Ritik574-coder/Vibe-Coding-Project/blob/main/google-gemini/Project/PythonProject/%20Python%20Architect%20Path%20Image/image3.png)
 *Personal learning tracker with confidence ratings and status updates*
 
 ---
