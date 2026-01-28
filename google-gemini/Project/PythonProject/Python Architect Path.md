@@ -1,4 +1,4 @@
-# 🐍 Python Mastery: From Zero to Architect
+# [🐍 Python Mastery: From Zero to Architect](https://gemini.google.com/share/ed03e635bc1d)
 
 > An interactive, AI-powered learning platform that transforms complete beginners into professional Python developers through structured curriculum and real-time progress tracking.
 
